@@ -15,9 +15,14 @@ class TodoController extends Controller
         $todos= Todo::all();
 
 //         Todo::create([
-// 'value' => "norun abi",
-// "is_completed" => false
+//  'value' => "norun abi",
+//  "is_completed" => false
 //         ]);
+
+        /*$todo = new Todo();
+        $todo->value= "test";
+        $todo->is_completed= false;
+        $todo->save();*/
 
         return view('todos.index', ['todos' => $todos]);
     }
