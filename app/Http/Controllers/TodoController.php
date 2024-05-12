@@ -12,12 +12,12 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos= Todo::all();
+        $todos = Todo::all();
 
-//         Todo::create([
-//  'value' => "norun abi",
-//  "is_completed" => false
-//         ]);
+        //         Todo::create([
+        //  'value' => "norun abi",
+        //  "is_completed" => false
+        //         ]);
 
         /*$todo = new Todo();
         $todo->value= "test";
@@ -28,50 +28,42 @@ class TodoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
-    }
+        $yapilacakIs = $request->yapilacak_is;
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        Todo::create([
+            'value' => $yapilacakIs,
+            "is_completed" => false
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        return redirect()->to('/')->with('notification', 'Todo basariyla eklenmistir.');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Todo $todo)
     {
-        //
+        $yapilacakIs = $request->get("yapilacak_is");
+        $tamamlandiMi = $request->has("tamamlandi_mi");
+
+        $todo->update([
+            'value' => $yapilacakIs,
+            'is_completed' => $tamamlandiMi
+        ]);
+
+        return redirect()->to('/')->with('notification', 'Todo basariyla  güncellenmişmiştir.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
+        return redirect()->to('/')->with('notification', 'Todo basariyla silinmiştir.');
     }
 }
