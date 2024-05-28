@@ -39,7 +39,7 @@ class TodoController extends Controller
             "is_completed" => false
         ]);
 
-        return redirect()->to('/')->with('notification', 'Todo basariyla eklenmistir.');
+        return redirect()->to('/')->with('notification', 'Todo basariyla eklenmistir.')->with('success',true);
     }
 
     /**
@@ -55,7 +55,7 @@ class TodoController extends Controller
             'is_completed' => $tamamlandiMi
         ]);
 
-        return redirect()->to('/')->with('notification', 'Todo basariyla  güncellenmişmiştir.');
+        return redirect()->to('/')->with('notification', 'Todo basariyla güncellenmiştir.')->with('success',true);
     }
 
     /**
